@@ -8,6 +8,7 @@ span.material-icons {
 
 .tr-questions-action:hover {
   background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 #green-prompt {

@@ -8,17 +8,19 @@ var arr_collected_links = [];
 var arr_time_of_issue = [];
 var arr_grades = [];
 var arr_students = [];
+var arr_assigned_questions = [];
 
 function start_page() {
   $.get(
-    "http://localhost/a_product/official/php/js-request/page_teacher_start.php",
+    current_hosting_url + "php/js-request/page_teacher_start.php",
     function (data) {
+      // alert(data);
       data = JSON.parse(data);
       document.getElementById("inserted-name").innerHTML = data[0]["username"];
       document.getElementById("account-course-code").innerHTML =
         "Course Code: " + data[0]["course_code"];
       $.get(
-        "http://localhost/a_product/official/php/js-request/page_teacher_start_data.php",
+        current_hosting_url + "php/js-request/page_teacher_start_data.php",
         function (data) {
           data = JSON.parse(data);
 
@@ -31,7 +33,11 @@ function start_page() {
               arr_time_of_issue.push(data[i]["time_of_issue"]);
               arr_grades.push(data[i]["HPS"]);
               $("#teacher-left-side-table-tr").append(
-                "<tr class='tr-questions-action'><td>" +
+                "<tr class='tr-questions-action' id='trquestion_" +
+                  i +
+                  "' onclick='click_tr_question(" +
+                  data[i]["question_id"] +
+                  ")'><td>" +
                   data[i]["question"] +
                   "</td><td>" +
                   data[i]["HPS"] +
@@ -44,7 +50,7 @@ function start_page() {
         }
       );
       $.get(
-        "http://localhost/a_product/official/php/js-request/page_teacher_start_students.php",
+        current_hosting_url + "php/js-request/page_teacher_start_students.php",
         function (data) {
           data = JSON.parse(data);
           if (data.length > 0) {

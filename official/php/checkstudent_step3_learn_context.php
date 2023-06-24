@@ -3,6 +3,7 @@
 function checkstudent_step3_learn_context($arr_documents){
 
     include 'foreign/cosine_similarity.php';
+
     $arr_extracted_original = array(); //pairing stemmed and non-stemmed by words
     $arr_cleansed_e_o = array(); //cleaning empty and useless elements
     $arr_counted_terms = array(); //counting term frequency
@@ -94,6 +95,30 @@ function checkstudent_step3_learn_context($arr_documents){
     }
     // print_r($arr_traced_terms);
 
+    $custom_traced_terms = array();
+
+    for($i = 0; $i < count($arr_traced_terms); $i++){
+        $custom_traced_terms[$arr_traced_terms[$i]] = $inverse_doc_frequency[$i];
+    }
+    natsort($custom_traced_terms);
+
+    // print_r($custom_traced_terms);
+    // echo "<br><br>";
+    $ranked_numbers = array();
+    $ranked_words = array();
+    $str_topwords = "";
+
+    foreach($custom_traced_terms as $key => $element){
+        array_push($ranked_numbers, $element);
+        array_push($ranked_words, $key);
+    }
+    // print_r($ranked_numbers);
+    // print_r($ranked_words);
+
+    for($i = 0; $i < 60; $i++){
+        $str_topwords .= ",".$ranked_words[$i];
+    }
+
     $best_score = 0;
     for($i = 1; $i < count($arr_tf_idf); $i++){
         // echo cosine_sim($arr_tf_idf[0], $arr_tf_idf[$i]).'<br>';
@@ -103,15 +128,15 @@ function checkstudent_step3_learn_context($arr_documents){
     }
     $best_score = round($best_score * 1000, 2);
 
-    if($best_score > 70){
-        $best_score = 'Accurate '.$best_score.'%';
-    } else if ($best_score >= 50){
-        $best_score = 'Correct '.$best_score.'%';
-    } else {
-        $best_score = 'Inaccurate '.$best_score.'%';
-    }
+    // if($best_score > 70){
+    //     $best_score = 'Accurate '.$best_score.'%';
+    // } else if ($best_score >= 50){
+    //     $best_score = 'Correct '.$best_score.'%';
+    // } else {
+    //     $best_score = 'Inaccurate '.$best_score.'%';
+    // }
 
-    return $best_score;
+    return $best_score.$str_topwords;
 }
 
 ?>

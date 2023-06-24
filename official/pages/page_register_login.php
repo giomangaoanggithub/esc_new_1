@@ -5,21 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Essay Speed Checker</title>
-    <link rel="stylesheet" href="http://localhost/a_product/official/css/page_register_login.css">
+    <link rel="stylesheet" id="page-styling" href="">
+    <script>
+    document.getElementById("page-styling").href = '../css/page_register_login.css';
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://fonts.cdnfonts.com/css/tw-cen-mt-condensed" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
-<body id="login_register_background" class="p-4">
+<body id="login_register_background" class="p-4" style="background-image: imgs/background-img-page-register-login.jpg">
     <div class="row flex-column-reverse flex-sm-row">
         <div class="login-register-left-side col-sm-6">
             <div>
-                <img src="http://localhost/a_product/official/imgs/boy-ride-rocket.webp" class="img-fluid" alt=""
-                    srcset="">
+                <img src="../imgs/boy-ride-rocket.webp" class="img-fluid" alt="" srcset="">
             </div>
 
             <div>
@@ -76,9 +79,21 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-<script src="http://localhost/a_product/official/js/page_register_login_struct.js"></script>
-<script src="http://localhost/a_product/official/js/page_register_login_funct.js"></script>
+<!-- <script>
+var current_hosting_url = "";
+sample_url = window.location.href;
+target = "official/";
+// alert("sample_url: " + sample_url.includes("official/"));
+for (i = 0; i < sample_url.indexOf(target) + target.length; i++) {
+    current_hosting_url += sample_url[i];
+}
+document.getElementById("page_register_login_struct").src = current_hosting_url + "js/page_register_login_struct.js";
+document.getElementById("page_register_login_funct").src = current_hosting_url + "js/page_register_login_funct.js";
+</script> -->
+<script id="page_register_login_struct" src="../js/page_register_login_struct.js">
+</script>
+<script id="page_register_login_funct" src="../js/page_register_login_funct.js">
+</script>
 
 
 </html>

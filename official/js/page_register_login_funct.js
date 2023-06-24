@@ -4,10 +4,13 @@ $("#account-loggingin").click(function () {
   var email = document.getElementById("email-input").value;
   var password = document.getElementById("password-input").value;
   var role = document.getElementById("role").value;
+
   // alert(email + "\n" + password + "\n" + role);
+  // window.location =
+  //   "https://37a5-112-204-168-121.ngrok-free.app/a_product/official/pages/page_teacher.php";
 
   $.post(
-    "http://localhost/a_product/official/php/js-request/check_account_existence.php",
+    current_hosting_url + "php/js-request/check_account_existence.php",
     {
       email: email,
     },
@@ -17,16 +20,14 @@ $("#account-loggingin").click(function () {
         return;
       }
       $.post(
-        "http://localhost/a_product/official/php/js-request/login_account.php",
+        current_hosting_url + "php/js-request/login_account.php",
         { email: email, password: password, role: role },
         function (data) {
           if (data == "exist") {
             if (role == "teacher") {
-              window.location =
-                "http://localhost/a_product/official/pages/page_teacher.php";
+              window.location = current_hosting_url + "pages/page_teacher.php";
             } else {
-              window.location =
-                "http://localhost/a_product/official/pages/page_student.php";
+              window.location = current_hosting_url + "pages/page_student.php";
             }
           } else {
             alert(
@@ -54,7 +55,7 @@ $("#account-registering").click(function () {
   }
 
   $.post(
-    "http://localhost/a_product/official/php/js-request/check_account_existence.php",
+    current_hosting_url + "php/js-request/check_account_existence.php",
     {
       email: email,
     },
@@ -63,7 +64,7 @@ $("#account-registering").click(function () {
         alert("Sorry, this email is already used in this website");
       } else {
         $.post(
-          "http://localhost/a_product/official/php/js-request/insert_account.php",
+          current_hosting_url + "php/js-request/insert_account.php",
           {
             email: email,
             password: password,
@@ -72,11 +73,9 @@ $("#account-registering").click(function () {
           function (data) {
             alert(data);
             if (role == "teacher") {
-              window.location =
-                "http://localhost/a_product/official/pages/page_teacher.php";
+              window.location = current_hosting_url + "pages/page_teacher.php";
             } else {
-              window.location =
-                "http://localhost/a_product/official/pages/page_student.php";
+              window.location = current_hosting_url + "pages/page_student.php";
             }
           }
         );

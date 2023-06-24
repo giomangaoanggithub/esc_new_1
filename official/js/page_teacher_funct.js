@@ -4,10 +4,9 @@
 // this button click logs out the user
 $("#logout-btn").click(function () {
   $.get(
-    "http://localhost/a_product/official/php/js-request/current_session_destroy.php",
+    current_hosting_url + "php/js-request/current_session_destroy.php",
     function () {
-      window.location =
-        "http://localhost/a_product/official/pages/page_register_login.php";
+      window.location = current_hosting_url + "pages/page_register_login.php";
     }
   );
 });
@@ -17,7 +16,7 @@ $("#post-question").click(function () {
   document.getElementById("overlay").style.display = "block";
   document.getElementById("show-loading").style.display = "block";
   $.post(
-    "http://localhost/a_product/official/php/ml_all_steps.php",
+    current_hosting_url + "php/ml_all_steps.php",
     {
       question: document.getElementById("post-question-content").value,
       hps: document.getElementById("choose-grade").value,
@@ -25,7 +24,7 @@ $("#post-question").click(function () {
     },
     function (response) {
       $.get(
-        "http://localhost/a_product/official/php/js-request/page_teacher_start_data.php",
+        current_hosting_url + "php/js-request/page_teacher_start_data.php",
         function (data) {
           data = JSON.parse(data);
           if (data.length > 0) {
@@ -102,7 +101,7 @@ function apply_change_username() {
     alert("You still have the same Username");
   } else {
     $.post(
-      "http://localhost/a_product/official/php/js-request/change_username.php",
+      current_hosting_url + "php/js-request/change_username.php",
       {
         username: document.getElementById("new-username-input").value,
         role: 1,
@@ -115,4 +114,57 @@ function apply_change_username() {
       }
     );
   }
+}
+
+function click_tr_question(num) {
+  $.post(
+    current_hosting_url + "php/js-request/page_teacher_fetch_question_data.php",
+    { question_id: num },
+    function (data) {
+      // alert(data);
+      data = JSON.parse(data);
+      document.getElementById("show-current-question").style.display = "none";
+      $("#teacher-right-side-table-tr").empty();
+      if (data.length > 0) {
+        for (i = 0; i < data.length; i++) {
+          calculated_grade = "";
+          arr_grade = data[i]["grades"].split("<&,&>");
+          if (arr_grade[2] * 100 >= 40) {
+            calculated_grade =
+              Math.round((arr_grade[0] / 100) * data[i]["HPS"]) -
+              arr_grade[1] +
+              " / " +
+              data[i]["HPS"];
+            $("#teacher-right-side-table-tr").append(
+              "<tr><td>" +
+                data[i]["time_of_submission"] +
+                "<br><br>" +
+                data[i]["answers"] +
+                "</td><td>" +
+                calculated_grade +
+                "</td><td>" +
+                data[i]["username"] +
+                '</td><td><span class="material-icons">edit</span></td></tr>'
+            );
+          } else {
+            calculated_grade = 0.05 * data[i]["HPS"];
+            $("#teacher-right-side-table-tr").append(
+              "<tr><td>" +
+                data[i]["time_of_submission"] +
+                "<br><br>" +
+                data[i]["answers"] +
+                "</td><td>" +
+                calculated_grade +
+                "</td><td>" +
+                data[i]["username"] +
+                '</td><td><span class="material-icons">edit</span></td></tr>'
+            );
+          }
+        }
+      } else {
+        document.getElementById("show-current-question").style.display =
+          "table-cell";
+      }
+    }
+  );
 }

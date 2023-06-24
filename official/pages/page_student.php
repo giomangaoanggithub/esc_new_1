@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Essay Speed Checker</title>
-    <link rel="stylesheet" href="http://localhost/a_product/official/css/page_student.css">
+    <link rel="stylesheet" href="../css/page_student.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js"
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -22,14 +22,27 @@
     <div id="show-loading"><img src="../imgs/loading.gif" alt=""></div>
     <div id="green-prompt">
         <div id="insert-title-div"><span id="insert-title">Title Here...</span></div>
-        <div id="green-prompt-content"></div>
+        <div id="green-prompt-content"></div><br>
+        <div id="answering-area" style="z-index: 2">
+            <grammarly-editor-plugin id="grammarlyapi">
+                <!-- grammarly_stopper() -->
+                <textarea cols="30" rows="10" id="textarea-answer" style="opacity: 100%" spellcheck="false"
+                    onkeyup="count_words()" onclick="grammarly_stopper()"></textarea>
+
+                <button onclick="cancel_btn_function()">CANCEL</button>
+                <button onclick="check_num_words()">SUBMIT</button>
+                <span>You have </span><span id="count-words">0</span><span> / 450</span>
+
+            </grammarly-editor-plugin>
+        </div>
     </div>
     <div id="show-username">
         <span>Name: </span><span id="inserted-name"></span>
         <span id="edit-username" class="material-icons">edit</span>
     </div>
     <div class="row">
-        <div class="course-code-input col-sm-6"><input type="text" placeholder="Search Course Code" size="30">
+        <div class="course-code-input col-sm-6"><input type="text" id="course-code-input"
+                placeholder="Search Course Code" size="30">
         </div>
         <div class="student-navbar col-sm-6 row">
             <div class="col-2 d-inline"><button id="enter-course-code">ENTER</button></div>
@@ -97,7 +110,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr id="show-no-course">
                         <td colspan="2" style="background-color: rgb(155, 157, 151);">No entered course yet...</td>
                     </tr>
                     <tr>
@@ -110,12 +123,7 @@
                                             <th style="width:20%; opacity: 0%"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>md5 course code</td>
-                                            <td><span class="material-icons">close</span></td>
-                                        </tr>
-
+                                    <tbody id="list-connected-teachers">
                                     </tbody>
                                 </table>
                             </div>
@@ -130,9 +138,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
-<script src="http://localhost/a_product/official/js/page_student_struct.js"></script>
-<script src="http://localhost/a_product/official/js/page_student_funct.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_62yhGBCs2fHyAsj5rWRoWu"></script>
+<script id="page_register_login_struct" src="../js/page_register_login_struct.js"></script>
+<script id="page_student_struct" src="../js/page_student_struct.js"></script>
+<script id="page_student_funct" src="../js/page_student_funct.js"></script>
 
 </html>

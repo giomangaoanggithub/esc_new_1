@@ -1,3 +1,18 @@
+var current_hosting_url = "";
+
+function get_hosting_url() {
+  sample_url = window.location.href;
+  target = "official/";
+  // alert("sample_url: " + sample_url.includes("official/"));
+
+  for (i = 0; i < sample_url.indexOf(target) + target.length; i++) {
+    current_hosting_url += sample_url[i];
+  }
+  // alert(current_hosting_url);
+}
+
+get_hosting_url();
+
 $("#show-login-form").click(function () {
   document.getElementById(
     "login-register-right-side-form-padding"

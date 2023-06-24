@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Essay Speed Checker</title>
-    <link rel="stylesheet" href="http://localhost/a_product/official/css/page_teacher.css">
+    <link rel="stylesheet" href="../css/page_teacher.css">
     <script src="https://code.jquery.com/jquery-3.7.0.js"
         integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -153,7 +153,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="4" style="background-color: rgb(0, 0, 0, 0.3);">
+                            <td id="show-current-question" colspan="4" style="background-color: rgb(0, 0, 0, 0.3);">
                                 No one answered yet...
                             </td>
                         </tr>
@@ -192,8 +192,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-<script src="http://localhost/a_product/official/js/page_teacher_struct.js"></script>
-<script src="http://localhost/a_product/official/js/page_teacher_funct.js"></script>
+<script src="../js/page_register_login_struct.js"></script>
+<script src="../js/page_teacher_struct.js"></script>
+<script src="../js/page_teacher_funct.js"></script>
 
 
 </html>

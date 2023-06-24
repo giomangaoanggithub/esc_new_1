@@ -1,5 +1,5 @@
 body {
-  background-image: url("http://localhost/a_product/official/imgs/background-img-page-register-login.jpg");
+  background-image: url("../imgs/background-img-page-register-login.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
